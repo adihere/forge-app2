@@ -1,6 +1,7 @@
 # Forge Hello World
 
 This project contains a Forge app written in JavaScript that displays `Hello World!` in a Jira global page.
+And a number of UI components
 
 See [developer.atlassian.com/platform/forge/](https://developer.atlassian.com/platform/forge) for documentation and tutorials explaining Forge.
 
