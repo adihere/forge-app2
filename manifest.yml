@@ -1,0 +1,16 @@
+modules:
+  jira:globalPage:
+    - key: app2-hello-world
+      function: main
+      title: app2
+  function:
+    - key: main
+      handler: index.run
+app:
+  id: ari:cloud:ecosystem::app/8df1742e-6e3b-4125-a24a-4ffc5085f2cb
+
+permissions:
+  scopes:
+    - 'read:jira-work'
+    - 'write:jira-work'
+
