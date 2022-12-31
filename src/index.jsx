@@ -62,7 +62,7 @@ async function callJIRA() {
       }
     });
   };
-  const callJIRAstatus = await response.json();  
-  console.log("CallJIRA status - after call" + callJIRAstatus.key);
+  const callJIRAstatus = await response.text;  
+  console.log("CallJIRA status - after call" + callJIRAstatus);
 }
 
