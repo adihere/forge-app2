@@ -1,6 +1,6 @@
 // language : javascript
 
-import ForgeUI, { render, Text, Fragment, GlobalPage, Button,SectionMessage,Table, Head, Cell,  Row ,Tabs,Tab } from '@forge/ui';
+import ForgeUI, { render, Text, Fragment, GlobalPage, Button,SectionMessage,Tabs,Tab } from '@forge/ui';
 import api, { route } from "@forge/api";
 
 const issues = [
@@ -32,27 +32,7 @@ const App = () => {
           async() => { await callJIRA();}       
       }      
       />
-      
-    <Table>
-      <Head>
-        <Cell>
-          <Text>Issue Key</Text>
-        </Cell>
-        <Cell>
-          <Text>Status</Text>
-        </Cell>
-      </Head>
-      {issues.map(issue => (
-        <Row>
-          <Cell>
-            <Text>{issue.key}</Text>
-          </Cell>
-          <Cell>
-            <Text>{issue.status}</Text>
-          </Cell>
-        </Row>
-      ))}
-    </Table>
+
 
     <Tabs>
       <Tab label="Tab 1">
@@ -82,7 +62,7 @@ async function callJIRA() {
       }
     });
   };
-  const callJIRAstatus = response.status;
+  const callJIRAstatus = await response.json();  
   console.log("CallJIRA status - after call" + callJIRAstatus.key);
 }
 
