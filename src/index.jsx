@@ -1,7 +1,7 @@
 // language : javascript
 
-//import ForgeUI, { render, Text, Fragment, GlobalPage } from '@forge/ui';
 import ForgeUI, { render, Text, Fragment, GlobalPage, Button,SectionMessage,Table, Head, Cell,  Row ,Tabs,Tab } from '@forge/ui';
+import api, { route } from "@forge/api";
 
 const issues = [
   {
@@ -27,14 +27,12 @@ const App = () => {
       </SectionMessage>
       
       <Button       
-        text = "Click me"
-        onClick={ 
-          async() => { console.log('clicked me!');} 
+        text = "Click me to get JIRA "
+        onClick = { 
+          async() => { await callJIRA();}       
       }      
       />
-
-      <Text> more text </Text>   
-
+      
     <Table>
       <Head>
         <Cell>
@@ -57,13 +55,13 @@ const App = () => {
     </Table>
 
     <Tabs>
-    <Tab label="Tab 1">
-        <Text>Hello yo</Text>
-    </Tab>
-    <Tab label="Tab 2">
-        <Text>World again!</Text>
-    </Tab>
-</Tabs>
+      <Tab label="Tab 1">
+          <Text>Hello yo</Text>
+      </Tab>
+      <Tab label="Tab 2">
+          <Text>World again!</Text>
+      </Tab>
+    </Tabs>
 
     </Fragment>
   );
@@ -75,4 +73,16 @@ export const run = render(
   </GlobalPage>
 )
 
+// API call to get JIRA issue
+async function callJIRA() {
+  const response = async () => {
+    await api.asUser().requestJira(route`/rest/api/2/issue/{HEL-1}`, {
+      headers: {
+        'Accept': 'application/json'
+      }
+    });
+  };
+  const callJIRAstatus = response.status;
+  console.log("CallJIRA status - after call" + callJIRAstatus.key);
+}
 

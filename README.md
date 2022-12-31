@@ -1,4 +1,4 @@
-# Forge Hello World
+# Forge Hello World and more 
 
 This project contains a Forge app written in JavaScript that displays `Hello World!` in a Jira global page.
 
