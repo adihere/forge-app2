@@ -15,6 +15,8 @@ const issues = [
 ];
 
 const timenow = Date.now();
+console.log('Starting ::: forge-react-issues ::::');
+      console.log('Starting :' + timenow);
 
 const App = () => {
   return (
@@ -24,8 +26,7 @@ const App = () => {
       <SectionMessage title="Playground" appearance="info">
         <Text>Some text from section</Text>
         <Text>More content from section</Text>
-      </SectionMessage>
-      
+      </SectionMessage>     
       <Button       
         text = "Click me to get JIRA "
         onClick = { 
@@ -62,7 +63,11 @@ async function callJIRA() {
       }
     });
   };
-  const callJIRAstatus = await response.text;  
-  console.log("CallJIRA status - after call" + callJIRAstatus);
+  const callJIRAtext = await response.text;  
+  const callJIRAstring = await response.toString(); 
+  console.log("CallJIRA status - after call string" + callJIRAstring);
+  console.log("CallJIRA status - after call text ->" + callJIRAtext);
+  //console.log("CallJIRA status - after call json ->" + await response.json());
+
 }
 
