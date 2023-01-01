@@ -56,6 +56,8 @@ export const run = render(
 
 // API call to get JIRA issue
 async function callJIRA() {
+  console.log("CALLING JIRA - inside function: "); 
+  
   const response = async () => {
     await api.asUser().requestJira(route`/rest/api/2/issue/{HEL-1}`, {
       headers: {
