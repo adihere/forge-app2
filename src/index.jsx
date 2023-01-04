@@ -2,6 +2,7 @@
 
 import ForgeUI, { render, Text, Fragment, GlobalPage, Button,SectionMessage,Tabs,Tab } from '@forge/ui';
 import api, { route } from "@forge/api";
+//import {requestJira} from "@forge/bridge";
 
 const issues = [
   {
@@ -57,19 +58,16 @@ export const run = render(
 // API call to get JIRA issue
 async function callJIRA() {
   console.log("CALLING JIRA - inside function: "); 
-  
-  const response = async () => {
-    await api.asUser().requestJira(route`/rest/api/2/issue/{HEL-1}`, {
-      headers: {
-        'Accept': 'application/json'
-      }
-    });
-  };
-  const callJIRAtext = await response.text;  
-  const callJIRAstring = await response.toString(); 
-  console.log("CallJIRA status - after call string" + callJIRAstring);
-  console.log("CallJIRA status - after call text ->" + callJIRAtext);
-  //console.log("CallJIRA status - after call json ->" + await response.json());
+  //const response = await api.asUser().requestJira(`https://adihere.atlassian.net/browse/HEL-1?jql=project = HEL`);
+  //const response = await api.asUser().requestJira(route `/rest/api/3/search?jql=project = HEL`);
+  const response = await api.asUser().requestJira(route `/rest/api/3/issue/{HEL-1}`);
 
-}
+  //const issueData = await response.json(); //... extract from response
+  //const callJIRAtext = await response.text;
+  console.log(`Response: ${response.status} ${response.statusText}`);  
+  //const callJIRAstring =  response.toString(); 
+  //console.log("CallJIRA status - after call string" + callJIRAstring);
+  //console.log(await response.json()); 
+
+};
 
