@@ -22,8 +22,8 @@ console.log('Starting ::: forge-react-issues ::::');
 const App = () => {
   return (
     <Fragment>
-      <Text>Hey world 2 again - 27 dec </Text>  
-      <Text>{timenow}</Text>      
+      <Text>Hey world 2 again - 11 jan 2023 </Text>  
+      <Text>{timenow.Date}</Text>      
       <SectionMessage title="Playground" appearance="info">
         <Text>Some text from section</Text>
         <Text>More content from section</Text>
@@ -59,15 +59,24 @@ export const run = render(
 async function callJIRA() {
   console.log("CALLING JIRA - inside function: "); 
   //const response = await api.asUser().requestJira(`https://adihere.atlassian.net/browse/HEL-1?jql=project = HEL`);
-  //const response = await api.asUser().requestJira(route `/rest/api/3/search?jql=project = HEL`);
-  const response = await api.asUser().requestJira(route `/rest/api/3/issue/{HEL-1}`);
-
-  //const issueData = await response.json(); //... extract from response
+  const response = await api.asUser().requestJira(route `/rest/api/3/search?jql=project = HEL`);
+  //const response = await api.asUser().requestJira(route `/rest/api/3/events`);
+  const issueData = await response.json(); //... extract from response
+  
+  if (response.status >= 400) {
+      //console.error(response.status,response.statusText);
+      console.log(`Error Response: ${response.status} ${response.statusText}`);  
+  }
+  
+  else
+  {     
   //const callJIRAtext = await response.text;
-  console.log(`Response: ${response.status} ${response.statusText}`);  
-  //const callJIRAstring =  response.toString(); 
-  //console.log("CallJIRA status - after call string" + callJIRAstring);
-  //console.log(await response.json()); 
+  console.log(`Successful Response: ${response.status} ${response.statusText}`);  
+  console.log("Spitting out JSON: " + await response.json());
+  console.log("Spitting out : " + await response.text());
+  
+  }
+
 
 };
 
