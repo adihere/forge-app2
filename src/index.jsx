@@ -41,7 +41,7 @@ const App = () => {
           <Text>Hello yo</Text>
       </Tab>
       <Tab label="Tab 2">
-          <Text>World again!</Text>
+          <Text id= "tab2"> World again!</Text>
       </Tab>
     </Tabs>
 
@@ -55,13 +55,40 @@ export const run = render(
   </GlobalPage>
 )
 
+    // Define recursive function to print nested values
+    function printValues(obj) {
+      for(var k in obj) {
+          if(obj[k] instanceof Object) {
+              printValues(obj[k]);
+          } else {
+              console.log(obj[k] + "\n");
+          };
+      }
+    };
+
+
+// Define recursive function to print nested values - diff implementation 
+function printValues2(jsonString) { 
+  let res = [];
+  const inputObject = JSON.parse(jsonString);
+  Object.keys(inputObject).forEach(key => {
+    const value = inputObject[key];
+    if (typeof value === 'object') {
+      res.push(printValues2(JSON.stringify(value)));
+      
+    } else {
+      res.push(value);
+      console.log(JSON.stringify(value));
+    }
+  });
+  return res;
+}
+
 // API call to get JIRA issue
 async function callJIRA() {
-  console.log("CALLING JIRA - inside function: "); 
-  //const response = await api.asUser().requestJira(`https://adihere.atlassian.net/browse/HEL-1?jql=project = HEL`);
+  console.log("CALLING JIRA - inside function: ");   
   const response = await api.asUser().requestJira(route `/rest/api/3/search?jql=project = HEL`);
-  //const response = await api.asUser().requestJira(route `/rest/api/3/events`);
-  const issueData = await response.json(); //... extract from response
+  const issueDataJSON = await response.json(); //... extract from response
   
   if (response.status >= 400) {
       //console.error(response.status,response.statusText);
@@ -70,13 +97,13 @@ async function callJIRA() {
   
   else
   {     
-  //const callJIRAtext = await response.text;
-  console.log(`Successful Response: ${response.status} ${response.statusText}`);  
-  console.log("Spitting out JSON: " + await response.json());
-  console.log("Spitting out : " + await response.text());
-  
-  }
+    //const callJIRAtext = await response.text;
+    console.log(`Successful Response: ${response.status} ${response.statusText}`);      
+    console.log("Spitting out JSON: \n" + issueDataJSON +"\n");
+    //console.log(issueDataJSON.issues.map(function(issue) {return issue.key}));
+    //objJSON = JSON.parse(issueDataJSON);
+    
+    printValues2(issueDataJSON);
 
-
-};
-
+ }
+}
