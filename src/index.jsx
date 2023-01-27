@@ -2,6 +2,7 @@
 
 import ForgeUI, { render, Text, Fragment, GlobalPage, Button,SectionMessage,Tabs,Tab } from '@forge/ui';
 import api, { route } from "@forge/api";
+import fetch from 'node-fetch';
 //import {requestJira} from "@forge/bridge";
 
 const issues = [
@@ -55,55 +56,12 @@ export const run = render(
   </GlobalPage>
 )
 
-    // Define recursive function to print nested values
-    function printValues(obj) {
-      for(var k in obj) {
-          if(obj[k] instanceof Object) {
-              printValues(obj[k]);
-          } else {
-              console.log(obj[k] + "\n");
-          };
-      }
-    };
-
-
-// Define recursive function to print nested values - diff implementation 
-function printValues2(jsonString) { 
-  let res = [];
-  const inputObject = JSON.parse(jsonString);
-  Object.keys(inputObject).forEach(key => {
-    const value = inputObject[key];
-    if (typeof value === 'object') {
-      res.push(printValues2(JSON.stringify(value)));
-      
-    } else {
-      res.push(value);
-      console.log(JSON.stringify(value));
-    }
-  });
-  return res;
-}
-
 // API call to get JIRA issue
 async function callJIRA() {
   console.log("CALLING JIRA - inside function: ");   
-  const response = await api.asUser().requestJira(route `/rest/api/3/search?jql=project = HEL`);
-  const issueDataJSON = await response.json(); //... extract from response
-  
-  if (response.status >= 400) {
-      //console.error(response.status,response.statusText);
-      console.log(`Error Response: ${response.status} ${response.statusText}`);  
-  }
-  
-  else
-  {     
-    //const callJIRAtext = await response.text;
-    console.log(`Successful Response: ${response.status} ${response.statusText}`);      
-    console.log("Spitting out JSON: \n" + issueDataJSON +"\n");
-    //console.log(issueDataJSON.issues.map(function(issue) {return issue.key}));
-    //objJSON = JSON.parse(issueDataJSON);
-    
-    printValues2(issueDataJSON);
+  //const response = await api.asUser().requestJira(route `/rest/api/3/search?jql=project = HEL`);
 
- }
-}
+  fetch( `https://adihere.atlassian.net/jira/rest/api/3/search?jql=project = HEL`)
+  .then ( response => {
+    console.log('INSIDE FETCH THEN');
+  })}
