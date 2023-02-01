@@ -17,12 +17,12 @@ const issues = [
 
 const timenow = Date.now();
 console.log('Starting ::: forge-react-issues ::::');
-      console.log('Starting :' + timenow);
+      console.log('Timenow :' + timenow);
 
 const App = () => {
   return (
     <Fragment>
-      <Text>Hey world 2 again - 11 jan 2023 </Text>  
+      <Text>Hey world 2 again - 1 feb  2023 </Text>  
       <Text>{timenow.Date}</Text>      
       <SectionMessage title="Playground" appearance="info">
         <Text>Some text from section</Text>
