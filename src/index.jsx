@@ -4,17 +4,6 @@ import ForgeUI, { render, Text, Fragment, GlobalPage, Button,SectionMessage,Tabs
 import api, { route } from "@forge/api";
 //import {requestJira} from "@forge/bridge";
 
-const issues = [
-  {
-    key: 'XEN-1',
-    status: 'In Progress',
-  },
-  {
-    key: 'XEN-2',
-    status: 'To Do',
-  },
-];
-
 const timenow = Date.now();
 console.log('Starting ::: forge-react-issues ::::');
       console.log('Starting :' + timenow);
